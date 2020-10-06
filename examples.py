@@ -48,8 +48,3 @@ def Burgers1D(state,*args):
              - (1.0/3.0)*(u[2:nx+1]+u[0:nx-1]+u[1:nx])*(u[2:nx+1]-u[0:nx-1])/(2.0*dx) 
              
     return f
-
-
-u=np.zeros(3)
-
-ff = Lorenz63(u)
