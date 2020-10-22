@@ -9,7 +9,6 @@ Created on Tue Oct  6 16:09:08 2020
 import numpy as np
 from scipy.linalg import block_diag
 from scipy.linalg import sqrtm
-
 import matplotlib.pyplot as plt
 from examples import *
 from time_integrators import *
