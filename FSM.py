@@ -207,7 +207,7 @@ u0a = u0b
 J0 = loss(Lorenz63,h,t,ind_m,u0a,w,R,1,sigma,beta,rho)
 for iter in range(200):
     
-    #computing the gradient of cost functional with base trajectory
+    #computing the correction vector
     du0 = fsm1st(Lorenz63,JLorenz63,h,Dh,t,ind_m,u0a,w,R,1,sigma,beta,rho)
     #minimization direction
     p = du0#/np.linalg.norm(du0) 
@@ -215,7 +215,6 @@ for iter in range(200):
     alpha = GoldenAlpha(p,Lorenz63,h,t,ind_m,u0a,w,R,1,sigma,beta,rho)   
     #update initial condition with gradient descent
     u0a = u0a + alpha*p  
-    #u0a = u0a + 0.25*du0
     J = loss(Lorenz63,h,t,ind_m,u0a,w,R,1,sigma,beta,rho)
     
     plt.plot(iter,J,'*')
