@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Oct  6 16:09:08 2020
-
-@author: Shady
+Demonstration of the 4DVAR method using the Lorenz63 system 
+"PyDA: A hands-on introduction to dynamical data assimilation with Python"
+@authors: Shady E. Ahmed, Suraj Pawar, Omer San
 """
 
 
@@ -84,7 +84,7 @@ def Adj4dvar(rhs,Jrhs,ObsOp,JObsOp,t,ind_m,u0b,w,R,opt,*args):
     return dJ0
 
 
-# Loss function (z-h(x))^T * R^{-1} * (z-h(x))
+# Loss function (w-h(u))^T * R^{-1} * (w-h(u))
 def loss(rhs,ObsOp,t,ind_m,u0,w,R,opt,*args):
     
     n = len(u0)
@@ -213,8 +213,11 @@ for iter in range(200):
     
     J = loss(Lorenz63,h,t,ind_m,u0a,w,R,1,sigma,beta,rho)
     
-    plt.plot(iter,J,'*')
-
+    plt.figure(1)
+    plt.plot(iter,J,'*',color='C0')
+    plt.xlabel(r'\bf{iteration}')
+    plt.ylabel(r'\bf{cost functional}')
+    
     if np.abs(J0-J) < 1e-2:
         print('Convergence: loss function')
         print(iter)

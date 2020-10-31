@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Oct  6 16:09:08 2020
-
-@author: Shady
+Demonstration of the FSM method using the Lorenz63 system 
+"PyDA: A hands-on introduction to dynamical data assimilation with Python"
+@authors: Shady E. Ahmed, Suraj Pawar, Omer San
 """
 
 

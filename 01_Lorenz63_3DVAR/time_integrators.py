@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Oct  6 16:09:08 2020
-
-@author: Shady
+Time integration routines for a tutorial paper on data assimilation
+"PyDA: A hands-on introduction to dynamical data assimilation with Python"
+@authors: Shady E. Ahmed, Suraj Pawar, Omer San
 """
 
 

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Oct  2 14:50:06 2020
-
-@author: Shady
+examples file for a tutorial paper on data assimilation
+"PyDA: A hands-on introduction to dynamical data assimilation with Python"
+@authors: Shady E. Ahmed, Suraj Pawar, Omer San
 """
 
 import numpy as np
@@ -20,7 +20,7 @@ def Lorenz63(state,*args): #Lorenz 96 model
     f[2] = x * y - beta * z
     return f 
 
-def JLorenz63(state,*args): #Jacobian of Lorenz 96 model
+def JLorenz63(state,*args): #Jacobian of Lorenz 63 model
     #rho = 28.0     #sigma = 10.0     #beta = 8.0 / 3.0
     
     sigma = args[0]
@@ -62,6 +62,37 @@ def Lorenz96(state,*args): # Lorenz 96 model
     return f
 
 
+def JLorenz96(state,*args): #Jacobian of Lorenz 96 model
+    x = state
+    F = args[0]
+    n = len(x)    
+    df = np.zeros([n,n])
+    # bounday points: i=0,1,N-1
+    df[0,0] = -1
+    df[0,1] = x[n-1]
+    df[0,n-1] = (x[1] - x[n-2])
+    df[0,n-2] = -x[n-1]
+
+    df[1,0] = (x[2] - x[n-1])
+    df[1,1] = -1
+    df[1,2] = x[0]
+    df[1,n-1] = -x[0]
+
+    df[n-1,0] =  x[n-2]
+    df[n-1,n-1] = -1
+    df[n-1,n-2] = (x[0] - x[n-3])
+    df[n-1,n-3] = -x[n-2]
+    
+    for i in range(2, n-1):
+        df[i,i] = -1
+        df[i,i+1] = x[i-1]
+        df[i,i-1] = x[i+1] - x[i-2]
+        df[i,i-2] = -x[i-1]
+
+    return df
+
+
+
 def Burgers1D(state,*args):
     
     u = state
@@ -73,3 +104,25 @@ def Burgers1D(state,*args):
              - (1.0/3.0)*(u[2:nx+1]+u[0:nx-1]+u[1:nx])*(u[2:nx+1]-u[0:nx-1])/(2.0*dx) 
              
     return f
+
+def JBurgers1D(state,*args):
+    
+    u = state
+    nu = args[0]
+    dx = args[1]
+    nx = len(u) - 1
+    df = np.zeros([nx+1,nx+1])
+         
+    for i in range(1,nx):
+        df[i,i] = (nu/(dx*dx))*(-2) \
+                 - (1.0/3.0)*(u[i+1]-u[i-1])/(2.0*dx) 
+        
+        df[i,i+1] = (nu/(dx*dx))*(1) \
+                  - (1.0/3.0)*(u[i+1]+u[i-1]+u[i])*(1)/(2.0*dx) \
+                  - (1.0/3.0)*(1)*(u[i+1]-u[i-1])/(2.0*dx) 
+                               
+        df[i,i-1] = (nu/(dx*dx))*(1) \
+                  - (1.0/3.0)*(u[i+1]+u[i-1]+u[i])*(-1)/(2.0*dx) \
+                  - (1.0/3.0)*(1)*(u[i+1]-u[i-1])/(2.0*dx) 
+
+    return df
