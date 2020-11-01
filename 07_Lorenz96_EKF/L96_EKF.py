@@ -160,9 +160,9 @@ ax[2].set_xlabel(r'$t$',fontsize=22)
 
 ax[2].legend(loc="center", bbox_to_anchor=(0.5,4.2),ncol =4,fontsize=15)
 
-ax[0].set_ylabel(r'$x_{9}(t)$')
-ax[1].set_ylabel(r'$x_{18}(t)$', labelpad=9)
-ax[2].set_ylabel(r'$x_{36}(t)$', labelpad=7)
+ax[0].set_ylabel(r'$X_{9}(t)$')
+ax[1].set_ylabel(r'$X_{18}(t)$', labelpad=9)
+ax[2].set_ylabel(r'$X_{36}(t)$', labelpad=7)
 fig.subplots_adjust(hspace=0.5)
 
 plt.savefig('L96_EKF.png', dpi = 500, bbox_inches = 'tight')
