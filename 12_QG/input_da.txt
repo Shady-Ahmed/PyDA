@@ -1,0 +1,16 @@
+128		    !NXF
+256		    !NYF
+1.0e2	    !Re, Reynolds number 
+0.00175	    !Ro, Rossby number 
+0.0	        !St, Strouhal number 
+3000   	    !NT, number of time step
+0.5e-4	    !dt; time step
+300   	    !nf;number of files to store
+1	        !isolver: [1]arakawa
+0	        !ifm; [0] No closure [1] DSM 
+5	        !ipr; [1]TGV, [2]VM, [3]Shear, [4]Decay, [5]QG
+20	        !npe; number of ensembles
+16	        !npx; observations points in x-direction
+32	        !npy; observations points in y-direction
+5.0	        !sd2; observation noise
+10	        !nb; frequency of observations assimilation
